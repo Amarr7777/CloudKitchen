@@ -1,11 +1,11 @@
 import ListItem from "./ListItem";
 
-function ListItemHome({ viewportHeight }) {
+function ListItemHome({ viewportHeight,viewportWidth }) {
   return (
     <>
       <div
-        className="flex flex-col justify-start items-center py-10 w-full "
-        style={{ height: `${viewportHeight}px` }}
+        className="flex flex-col justify-start items-center py-10 md:w-full "
+        style={{ height: `${viewportHeight}px`,width: `${viewportWidth}px`}}
       >
         <div className="flex  md:justify-end items-center w-4/5  mb-1">
           <input

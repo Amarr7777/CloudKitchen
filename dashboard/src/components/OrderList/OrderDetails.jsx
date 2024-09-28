@@ -1,9 +1,15 @@
 import React from "react";
 import OrderItem from "./OrderItem";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
-function OrderDetails() {
+function OrderDetails({ handleDetailsVisibility }) {
   return (
     <div className="flex flex-col h-full">
+      <div className="">
+        <button onClick={handleDetailsVisibility} className="py-2 md:hidden">
+          <KeyboardBackspaceIcon className="text-gray-500" />
+        </button>
+      </div>
       <div className="flex items-center justify-between p-5 bg-gray-300">
         <p className="text-green-900">42E612</p>
         <p className="text-gray-500 font-light">234567</p>

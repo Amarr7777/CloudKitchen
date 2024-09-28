@@ -16,10 +16,10 @@ function ListItem() {
       </label>
       <p>256</p>
       <div className="flex justify-between gap-3">
-        <button>
+        <button className="p-2 hover:bg-green-100 rounded-md">
           <EditIcon className="text-green-900" />
         </button>
-        <button>
+        <button className="p-2 hover:bg-red-100 rounded-md">
           <DeleteIcon className="text-red-600" />
         </button>
       </div>

@@ -14,6 +14,7 @@ function SideBar({ viewportHeight, setIndex }) {
         className="flex flex-col w-full items-center justify-start mt-1 space-y-1 px-4 gap-5 pt-5 relative "
         style={{ height: `${viewportHeight * 0.9}px` }}
       >
+        {/* add item */}
         <li
           onClick={() => {
             setIndex(0);
@@ -25,6 +26,7 @@ function SideBar({ viewportHeight, setIndex }) {
             Add item
           </p>
         </li>
+        {/* menu */}
         <li
           onClick={() => {
             setIndex(1);
@@ -36,6 +38,7 @@ function SideBar({ viewportHeight, setIndex }) {
             menu
           </p>
         </li>
+        {/* order */}
         <li
           onClick={() => {
             setIndex(2);
@@ -47,6 +50,7 @@ function SideBar({ viewportHeight, setIndex }) {
             Orders
           </p>
         </li>
+        {/* logout */}
         <li
           onClick={() => {
             setIndex(2);

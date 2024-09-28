@@ -6,10 +6,10 @@ function OrderListHome({ viewportHeight }) {
   return (
     <>
       <div
-        className="flex flex-col justify-start items-center py-10 w-full"
-        style={{ height: `${viewportHeight}px` }}
+        className="hidden md:flex md:flex-col justify-start items-center py-10 md:w-full"
+        style={{ height: `${viewportHeight}px`}}
       >
-        <div className="flex  md:justify-end items-center w-4/5 md:w-4/5">
+        <div className="flex justify-end items-center w-4/5 md:w-4/5">
           <input
             type="text"
             placeholder="search"
@@ -17,7 +17,7 @@ function OrderListHome({ viewportHeight }) {
           />
         </div>
         <div
-          className="grid grid-cols-[300px,1fr] gap-5 w-4/5 mt-1"
+          className="grid grid-rows-2 justify-center items-center md:grid-cols-[300px,1fr] md:grid-rows-1 gap-5 w-4/5 mt-1 "
           style={{
             minHeight: `${viewportHeight * 0.7}px`,
             maxHeight: `${viewportHeight * 0.7}px`,
@@ -30,10 +30,11 @@ function OrderListHome({ viewportHeight }) {
             <div
               className="flex flex-col overflow-hidden overflow-y-auto"
               style={{
-                minHeight: `${viewportHeight * 0.7}px`,
-                maxHeight: `${viewportHeight * 0.7}px`,
+                minHeight: `${viewportHeight * 0.6}px`,
+                maxHeight: `${viewportHeight * 0.6}px`,
               }}
             >
+              <OrderList />
               <OrderList />
             </div>
           </div>
