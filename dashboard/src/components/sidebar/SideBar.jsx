@@ -7,7 +7,7 @@ import logoutLogo from "../../assets/logout.svg";
 function SideBar({ viewportHeight, setIndex }) {
   return (
     <div
-      className="hidden md:block bg-white"
+      className="hidden md:block bg-white shadow-md"
       style={{ height: `${viewportHeight}px` }}
     >
       <ul
@@ -15,7 +15,7 @@ function SideBar({ viewportHeight, setIndex }) {
         style={{ height: `${viewportHeight * 0.9}px` }}
       >
         {/* add item */}
-        <li
+        {/* <li
           onClick={() => {
             setIndex(0);
           }}
@@ -25,11 +25,11 @@ function SideBar({ viewportHeight, setIndex }) {
           <p className="absolute text-nowrap left-10 top-1 hidden group-hover:flex font-medium text-sm text-green-900 bg-gray-200 rounded-md px-2 py-1">
             Add item
           </p>
-        </li>
+        </li> */}
         {/* menu */}
         <li
           onClick={() => {
-            setIndex(1);
+            setIndex(0);
           }}
           className="hover:scale-110 cursor-pointer group"
         >
@@ -41,7 +41,7 @@ function SideBar({ viewportHeight, setIndex }) {
         {/* order */}
         <li
           onClick={() => {
-            setIndex(2);
+            setIndex(1);
           }}
           className="hover:scale-110 cursor-pointer group"
         >
@@ -53,7 +53,7 @@ function SideBar({ viewportHeight, setIndex }) {
         {/* logout */}
         <li
           onClick={() => {
-            setIndex(2);
+            setIndex(1);
           }}
           className="hover:scale-110 cursor-pointer group absolute bottom-0"
         >

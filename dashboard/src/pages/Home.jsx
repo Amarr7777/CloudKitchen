@@ -17,7 +17,7 @@ function Home() {
 
   const handleResize = () => {
     setViewportHeight(window.innerHeight);
-    setViewportWidth(window.innerWidth)
+    setViewportWidth(window.innerWidth);
   };
 
   useEffect(() => {
@@ -55,15 +55,22 @@ function Home() {
         <div>
           <SideBar viewportHeight={viewportHeight} setIndex={setIndex} />
         </div>
-        <div className="bg-gray-100 ">
+        <div className="bg-mainBg ">
           {index === 0 ? (
-            <AdditemHome viewportHeight={viewportHeight} viewportWidth={viewportWidth} />
-          ) : index === 1 ? (
-            <ListItemHome viewportHeight={viewportHeight} viewportWidth={viewportWidth} />
+            <ListItemHome
+              viewportHeight={viewportHeight}
+              viewportWidth={viewportWidth}
+            />
           ) : (
             <>
-              <OrderListHome viewportHeight={viewportHeight} viewportWidth={viewportWidth} />
-              <OrderHomeMobile viewportHeight={viewportHeight} viewportWidth={viewportWidth} />
+              <OrderListHome
+                viewportHeight={viewportHeight}
+                viewportWidth={viewportWidth}
+              />
+              <OrderHomeMobile
+                viewportHeight={viewportHeight}
+                viewportWidth={viewportWidth}
+              />
             </>
           )}
         </div>

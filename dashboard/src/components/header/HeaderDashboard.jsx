@@ -3,7 +3,7 @@ import logo from "../../assets/logo.svg";
 
 function HeaderDashboard() {
   return (
-    <div className="w-full py-2 px-5 flex justify-between bg-white">
+    <div className="w-full py-2 px-5 flex justify-between bg-white shadow-md">
       <div className="text-3xl font-bold">
         <div className="bg-gradient-to-r from-green-700 to-green-900 text-transparent bg-clip-text">
           <p className="">CLOUD KITCHEN</p>

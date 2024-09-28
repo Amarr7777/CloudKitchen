@@ -11,8 +11,8 @@ function OrderHomeMobile({ viewportHeight, viewportWidth }) {
 
   return (
     <div
-      style={{ height: `${viewportHeight}px`, width: `${viewportWidth}px` }}
-      className="flex flex-col bg-gray-100 items-center md:hidden"
+      style={{ minHeight: `${viewportHeight}px`, width: `${viewportWidth}px` }}
+      className="flex flex-col items-center md:hidden "
     >
       <div className="p-2 mx-2 shadow-md rounded-md mt-10 bg-white w-4/5">
         {detailsVisible ? (

@@ -1,12 +1,24 @@
 import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
-function AddItem({ viewportHeight }) {
+function AddItem({ setShowAddModal }) {
   return (
     <form
       className={`py-2 m-2 md:m-0 px-5 border border-green-900 rounded-md space-y-5 shadow-xl bg-white w-4/5 md:w-1/2 flex`}
     >
       <div className="space-y-2 w-full">
-        <h1 className="font-bold text-lg">Add Item</h1>
+        <div className="flex justify-between">
+          <h1 className="font-bold text-lg">Add Item</h1>
+          <button
+            className="hover:scale-105 hover:bg-red-50 rounded-md p-2"
+            onClick={() => {
+              setShowAddModal(false);
+            }}
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
         <input
           type="text"
           placeholder="Item name"

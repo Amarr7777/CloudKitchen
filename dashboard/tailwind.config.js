@@ -8,9 +8,12 @@ export default {
     extend: {
       colors: {
         primary: '#a2a193',
+      },
+      backgroundImage: {
+        'mainBg': "url('/src/assets/bg.svg')"
       }
     },
-    
+
   },
   plugins: [],
 }
