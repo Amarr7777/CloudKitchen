@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import AddIcon from "@mui/icons-material/Add";
 import AdditemHome from "../AddItem/AdditemHome";
 
-function ListItemHome({ viewportHeight, viewportWidth }) {
+function ListItemHome({ viewportHeight, viewportWidth, setFoodData, foodData }) {
   const [showAddModal, setShowAddModal] = useState(false);
+  
+
+  const getFoodData = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/food/listfoods", {
+        method: "GET",
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        setFoodData(result.data);
+      } 
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (foodData.length) return;
+    getFoodData();
+  }, []);
+
   return (
     <>
-    {/* add modal */}
-    {
-        showAddModal ? <AdditemHome setShowAddModal={setShowAddModal}/> : null
-    }
+      {/* add modal */}
+      {showAddModal ? <AdditemHome setShowAddModal={setShowAddModal} onAdd = {getFoodData}/> : null}
       <div
         className={`flex flex-col justify-start items-center py-10 md:w-full w-[${viewportWidth}]`}
         style={{
@@ -42,8 +62,21 @@ function ListItemHome({ viewportHeight, viewportWidth }) {
             maxHeight: `${viewportHeight * 0.7}px`,
           }}
         >
-          <ListItem viewportHeight={viewportHeight}
-                viewportWidth={viewportWidth}/>
+          {foodData.length ?(
+            foodData.map((item) => (
+              <ListItem
+                key={item.id} 
+                foodData={item} 
+                viewportHeight={viewportHeight}
+                viewportWidth={viewportWidth}
+                onDelete = {getFoodData}
+              />
+            ))):(
+              <div className="flex justify-center items-center w-full h-full">
+                <p className="font-medium text-gray-500">There is nothing in your menu, Let's add some</p>
+              </div>
+            )
+            }
         </div>
       </div>
     </>

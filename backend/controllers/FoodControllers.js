@@ -34,13 +34,24 @@ const listFood = async (req, res) => {
 //edit food
 const editFood = async (req, res) => {
     try {
-        const food = await foodModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.json({ success: true, data: food })
+      const foodId = req.params.id; // Use the ID from the URL
+      const updatedFoodData = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        category: req.body.category,
+      };
+      if (req.file) {
+        updatedFoodData.image = req.file.filename;
+      }
+  
+      const food = await foodModel.findByIdAndUpdate(foodId, updatedFoodData, { new: true });
+      res.json({ success: true, data: food });
     } catch (error) {
-        console.log("error")
-        res.json({ success: false, message: "Error" })
+      console.error("Error:", error);
+      res.status(500).json({ success: false, message: "Error" });
     }
-}
+  };
 
 //delete food
 const deleteFood = async (req, res) => {
@@ -50,7 +61,7 @@ const deleteFood = async (req, res) => {
         await foodModel.findByIdAndDelete(req.body.id);
         res.json({ success: true, message: "food deleted" })
     } catch (error) {
-        console.log("Error")
+        console.log(error)
         res.json({ success: false, message: "error" })
     }
 }

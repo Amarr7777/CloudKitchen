@@ -14,6 +14,7 @@ function Home() {
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [index, setIndex] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [foodData, setFoodData] = useState([]);
 
   const handleResize = () => {
     setViewportHeight(window.innerHeight);
@@ -58,6 +59,8 @@ function Home() {
         <div className="bg-mainBg ">
           {index === 0 ? (
             <ListItemHome
+              foodData= {foodData}
+              setFoodData = {setFoodData}
               viewportHeight={viewportHeight}
               viewportWidth={viewportWidth}
             />
