@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CloseIcon from "@mui/icons-material/Close";
 
-function EditItem({ setShowEditModal, foodData, onEdit }) {
+function EditItem({ setShowEditModal, foodData, onEdit, url }) {
   const [name, setName] = useState(foodData.name);
-  const [description, setDescription] = useState(foodData.description);
+  const [quantity, setQuatity] = useState(foodData.quantity);
   const [price, setPrice] = useState(foodData.price);
   const [category, setCategory] = useState(foodData.category);
   const [selectedImage, setSelectedImage] = useState(null); // Initialize as null
@@ -11,7 +11,7 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
 
   useEffect(() => {
     setName(foodData.name);
-    setDescription(foodData.description);
+    setQuatity(foodData.quantity);
     setPrice(foodData.price);
     setCategory(foodData.category);
     if (foodData.image) {
@@ -28,14 +28,14 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    if (!name || !description || !price || !category) {
+    if (!name || !quantity || !price || !category) {
       setShowError(true);
       return; 
     }
     const formData = new FormData();
     formData.append('id', foodData._id); 
     formData.append('name', name);
-    formData.append('description', description);
+    formData.append('quantity', quantity);
     formData.append('price', price);
     formData.append('category', category);
     formData.append('stock', true);
@@ -44,7 +44,7 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/food/editfood/${foodData._id}`, {
+      const response = await fetch(`${url}/api/food/editfood/${foodData._id}`, {
         method: "PUT",
         body: formData,
       });
@@ -86,13 +86,12 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
           value={name}
           onChange={(e) => setName(e.target.value)} // Update name on change
         />
-        <textarea
+        <input
           className="w-full rounded-lg p-3 border border-green-900 text-sm"
-          placeholder="Description"
-          rows="4"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)} // Update description
-        ></textarea>
+          placeholder="Quantity"
+          value={quantity}
+          onChange={(e) => setQuatity(e.target.value)} // Update quantity
+        />
         {/* price and category */}
         <div className="flex flex-wrap md:flex-nowrap gap-1 w-full">
           <input
@@ -102,20 +101,27 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
             onChange={(e) => setPrice(e.target.value)}
             className="rounded-lg p-3 w-1/2 border border-green-900 text-sm"
           />
-          <input
-            type="text"
-            placeholder="Category"
+          <select
+            className="rounded-lg p-3 w-1/2 border border-green-900 text-sm"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="rounded-lg p-3 w-1/2 border border-green-900 text-sm"
-          />
+          >
+            <option value="" disabled>
+              Select Category
+            </option>
+            <option value="Fruits">Fruits</option>
+            <option value=" Vegitable">Vegitable</option>
+            <option value="Health and wellnes">Health and wellnes</option>
+            <option value="Munchies">Munchies</option>
+            {/* Add more categories as needed */}
+          </select>
         </div>
         {/* Existing image */}
         {foodData.image && (
           <div>
             <p>Current Image:</p>
             <img
-              src={`http://localhost:4000/images/${foodData.image}`} // Adjust URL as per your API
+              src={`${url}/images/${foodData.image}`} 
               alt="Current"
               width="100"
             />

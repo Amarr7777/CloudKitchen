@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 
-function AddItem({ setShowAddModal, onAdd }) {
+function AddItem({ setShowAddModal, onAdd, url }) {
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,20 +21,20 @@ function AddItem({ setShowAddModal, onAdd }) {
   // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !description || !price || !category || !selectedImage) {
+    if (!name || !quantity || !price || !category || !selectedImage) {
       setShowError(true);
     } else {
       setShowError(false);
       setShowAddModal(false);
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("description", description);
+      formData.append("quantity", quantity);
       formData.append("price", price);
       formData.append("category", category);
       formData.append("image", selectedImage);
       formData.append("stock", true);
       try {
-        const response = await fetch("http://localhost:4000/api/food/add", {
+        const response = await fetch(`${url}/api/food/add`, {
           method: "POST",
           body: formData,
         });
@@ -42,7 +42,7 @@ function AddItem({ setShowAddModal, onAdd }) {
 
         if (result.success) {
           setSuccessMessage("Item added successfully!");
-          onAdd()
+          onAdd();
         } else {
           setSuccessMessage("There was an error adding the item.");
         }
@@ -79,16 +79,15 @@ function AddItem({ setShowAddModal, onAdd }) {
           }}
           className="w-full rounded-lg  p-3 text-sm border border-green-900"
         />
-        {/* description */}
-        <textarea
+        {/* quantity */}
+        <input
           className="w-full rounded-lg  p-3 border  border-green-900 text-sm"
-          placeholder="Description"
+          placeholder="quantity"
           onChange={(e) => {
-            setDescription(e.target.value);
+            setQuantity(e.target.value);
           }}
-          rows="4"
           id="message"
-        ></textarea>
+        />
         {/* price and category */}
         <div className="flex flex-wrap md:flex-nowrap gap-1 w-full">
           <input
@@ -99,14 +98,20 @@ function AddItem({ setShowAddModal, onAdd }) {
             }}
             className="rounded-lg p-3 w-1/2 border border-green-900 text-sm"
           />
-          <input
-            type="text"
-            placeholder="Category"
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
+          <select
             className="rounded-lg p-3 w-1/2 border border-green-900 text-sm"
-          />
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="" disabled>
+              Select Category
+            </option>
+            <option value="Fruits">Fruits</option>
+            <option value=" Vegitable">Vegitable</option>
+            <option value="Health and wellnes">Health and wellnes</option>
+            <option value="Munchies">Munchies</option>
+            {/* Add more categories as needed */}
+          </select>
         </div>
         {/* image */}
         <div>

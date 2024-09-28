@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import HeaderDashboard from "../components/header/HeaderDashboard";
-import AdditemHome from "../components/AddItem/AdditemHome";
 import ListItemHome from "../components/ListItem/ListItemHome";
 import OrderListHome from "../components/OrderList/OrderListHome";
 import SidebarMobile from "../components/sidebar/SidebarMobile";
@@ -15,6 +14,8 @@ function Home() {
   const [index, setIndex] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
   const [foodData, setFoodData] = useState([]);
+
+  const url = "http://localhost:4000";
 
   const handleResize = () => {
     setViewportHeight(window.innerHeight);
@@ -58,12 +59,15 @@ function Home() {
         </div>
         <div className="bg-mainBg ">
           {index === 0 ? (
-            <ListItemHome
-              foodData= {foodData}
-              setFoodData = {setFoodData}
-              viewportHeight={viewportHeight}
-              viewportWidth={viewportWidth}
-            />
+            <>
+              <ListItemHome
+                foodData={foodData}
+                setFoodData={setFoodData}
+                viewportHeight={viewportHeight}
+                viewportWidth={viewportWidth}
+                url={url}
+              />
+            </>
           ) : (
             <>
               <OrderListHome

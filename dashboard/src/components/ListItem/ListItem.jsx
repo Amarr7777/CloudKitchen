@@ -7,7 +7,7 @@ import { green } from "@mui/material/colors";
 import Switch from "@mui/material/Switch";
 import ToggleSwitch from "./ToggleSwitch";
 
-function ListItem({ viewportHeight, viewportWidth, foodData, onDelete }) {
+function ListItem({ viewportHeight, viewportWidth, foodData, onDelete, url }) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [stock, setStock] = useState(foodData.stock);
 
@@ -15,7 +15,7 @@ function ListItem({ viewportHeight, viewportWidth, foodData, onDelete }) {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        "http://localhost:4000/api/food/deletefood",
+        `${url}/api/food/deletefood`,
         {
           method: "DELETE",
           headers: {
@@ -38,7 +38,7 @@ function ListItem({ viewportHeight, viewportWidth, foodData, onDelete }) {
 
   const handleEditStock = async (newStockValue) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/food/editstock/${foodData._id}`, {
+      const response = await fetch(`${url}/api/food/editstock/${foodData._id}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json'
@@ -74,6 +74,7 @@ function ListItem({ viewportHeight, viewportWidth, foodData, onDelete }) {
           viewportHeight={viewportHeight}
           viewportWidth={viewportWidth}
           setShowEditModal={setShowEditModal}
+          url = {url}
         />
       ) : null}
       <div className="w-full py-2 px-5 shadow-md rounded-md flex flex-wrap justify-between items-center border border-green-900 ">

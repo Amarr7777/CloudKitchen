@@ -7,7 +7,7 @@ const addItem = async (req, res) => {
 
     const food = new foodModel({
         name: req.body.name,
-        description: req.body.description,
+        quantity: req.body.quantity,
         price: req.body.price,
         category: req.body.category,
         image: image_filename
@@ -37,7 +37,7 @@ const editFood = async (req, res) => {
         const foodId = req.params.id; // Use the ID from the URL
         const updatedFoodData = {
             name: req.body.name,
-            description: req.body.description,
+            quantity: req.body.quantity,
             price: req.body.price,
             category: req.body.category,
         };
