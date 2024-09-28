@@ -32,6 +32,7 @@ function AddItem({ setShowAddModal, onAdd }) {
       formData.append("price", price);
       formData.append("category", category);
       formData.append("image", selectedImage);
+      formData.append("stock", true);
       try {
         const response = await fetch("http://localhost:4000/api/food/add", {
           method: "POST",

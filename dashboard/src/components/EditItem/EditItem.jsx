@@ -38,6 +38,7 @@ function EditItem({ setShowEditModal, foodData, onEdit }) {
     formData.append('description', description);
     formData.append('price', price);
     formData.append('category', category);
+    formData.append('stock', true);
     if (selectedImage) {
       formData.append('image', selectedImage); 
     }

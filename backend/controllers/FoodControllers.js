@@ -34,24 +34,38 @@ const listFood = async (req, res) => {
 //edit food
 const editFood = async (req, res) => {
     try {
-      const foodId = req.params.id; // Use the ID from the URL
-      const updatedFoodData = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        category: req.body.category,
-      };
-      if (req.file) {
-        updatedFoodData.image = req.file.filename;
-      }
-  
-      const food = await foodModel.findByIdAndUpdate(foodId, updatedFoodData, { new: true });
-      res.json({ success: true, data: food });
+        const foodId = req.params.id; // Use the ID from the URL
+        const updatedFoodData = {
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category: req.body.category,
+        };
+        if (req.file) {
+            updatedFoodData.image = req.file.filename;
+        }
+
+        const food = await foodModel.findByIdAndUpdate(foodId, updatedFoodData, { new: true });
+        res.json({ success: true, data: food });
     } catch (error) {
-      console.error("Error:", error);
-      res.status(500).json({ success: false, message: "Error" });
+        console.error("Error:", error);
+        res.status(500).json({ success: false, message: "Error" });
     }
-  };
+};
+// edit stock
+const editStock = async (req, res) => {
+    try {
+        const foodId = req.params.id;
+        const updatedStockData = {
+            stock: req.body.stock
+        }
+        const food = await foodModel.findByIdAndUpdate(foodId, updatedStockData, { new: true });
+        res.json({ success: true, data: food });
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ success: false, message: "Error" });
+    }
+}
 
 //delete food
 const deleteFood = async (req, res) => {
@@ -65,4 +79,4 @@ const deleteFood = async (req, res) => {
         res.json({ success: false, message: "error" })
     }
 }
-export { addItem, listFood, deleteFood, editFood }
+export { addItem, listFood, deleteFood, editFood, editStock }
