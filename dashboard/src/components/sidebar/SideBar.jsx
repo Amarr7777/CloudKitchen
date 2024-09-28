@@ -1,19 +1,62 @@
 import React from "react";
-function SideBar({ viewportHeight }) {
+import menuLogo from "../../assets/menu.svg";
+import orderLogo from "../../assets/order.svg";
+import addLogo from "../../assets/add.svg";
+import logoutLogo from "../../assets/logout.svg";
+
+function SideBar({ viewportHeight, setIndex }) {
   return (
     <div
-      className="hidden md:block border-r border-primary"
+      className="hidden md:block bg-white"
       style={{ height: `${viewportHeight}px` }}
     >
-      <ul className="pt-2 space-y-1 px-4">
-        <li className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">
-          Add Item
+      <ul
+        className="flex flex-col w-full items-center justify-start mt-1 space-y-1 px-4 gap-5 pt-5 relative "
+        style={{ height: `${viewportHeight * 0.9}px` }}
+      >
+        <li
+          onClick={() => {
+            setIndex(0);
+          }}
+          className="hover:scale-110 cursor-pointer group "
+        >
+          <img src={addLogo} alt="" />
+          <p className="absolute text-nowrap left-10 top-1 hidden group-hover:flex font-medium text-sm text-green-900 bg-gray-200 rounded-md px-2 py-1">
+            Add item
+          </p>
         </li>
-        <li className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">
-          List Item
+        <li
+          onClick={() => {
+            setIndex(1);
+          }}
+          className="hover:scale-110 cursor-pointer group"
+        >
+          <img src={menuLogo} alt="" />
+          <p className="absolute left-10 top-1 hidden group-hover:flex font-medium text-sm text-green-900 bg-gray-200 rounded-md px-2 py-1">
+            menu
+          </p>
         </li>
-        <li className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700 cursor-pointer">
-          Orders
+        <li
+          onClick={() => {
+            setIndex(2);
+          }}
+          className="hover:scale-110 cursor-pointer group"
+        >
+          <img src={orderLogo} alt="" />
+          <p className="absolute left-10 top-1 hidden group-hover:flex font-medium text-sm text-green-900 bg-gray-200 rounded-md px-2 py-1">
+            Orders
+          </p>
+        </li>
+        <li
+          onClick={() => {
+            setIndex(2);
+          }}
+          className="hover:scale-110 cursor-pointer group absolute bottom-0"
+        >
+          <img src={logoutLogo} alt="" />
+          <p className="absolute left-10 top-1 hidden group-hover:flex font-medium text-sm text-green-900 bg-gray-200 rounded-md px-2 py-1">
+            Logout
+          </p>
         </li>
       </ul>
     </div>
