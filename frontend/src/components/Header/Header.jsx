@@ -56,7 +56,7 @@ function Header({ handleLogin, handleSignin, onLogout }) {
           </div>
           {/* buttons */}
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex sm:gap-4">
+            <div className="flex gap-2">
               <a
                 className="rounded-md bg-transparent px-2 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor"
                 href="#"
@@ -69,11 +69,11 @@ function Header({ handleLogin, handleSignin, onLogout }) {
                 <>
                   <button
                     onClick={handleLogout}
-                    className="cursor-pointer rounded-full bg-fourthColor px-5 py-2 hover:scale-105  font-Quicksand font-medium text-primary"
+                    className="cursor-pointer rounded-full bg-fourthColor px-2 md:px-5 py-2 hover:scale-105  font-Quicksand font-medium text-primary"
                   >
                     <div className="flex items-center justify-center gap-1 ">
                       <LogoutRoundedIcon />
-                      <p>Log out</p>
+                      <p className="hidden lg:block">Log out</p>
                     </div>
                   </button>
                 </>
@@ -81,37 +81,36 @@ function Header({ handleLogin, handleSignin, onLogout }) {
                 <>
                   <div
                     onClick={handleSignin}
-                    className=" cursor-pointer rounded-full bg-transparent px-5 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor border border-fourthColor"
+                    className=" cursor-pointer rounded-full bg-transparent px-2 md:px-5 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor border border-fourthColor"
                   >
                     <div className="flex items-center justify-center gap-1 ">
                       <HowToRegIcon />
-                      <p>Sign in</p>
+                      <p className="hidden lg:block">Sign in</p>
                     </div>
                   </div>
                   <div
                     onClick={handleLogin}
-                    className="cursor-pointer rounded-full bg-fourthColor px-5 py-2 hover:scale-105  font-Quicksand font-medium text-primary"
+                    className="cursor-pointer rounded-full bg-fourthColor px-2 md:px-5 py-2 hover:scale-105  font-Quicksand font-medium text-primary"
                   >
                     <div className="flex items-center justify-center gap-1 ">
                       <LoginIcon />
-                      <p>Login</p>
+                      <p className="hidden lg:block">Login</p>
                     </div>
                   </div>
                 </>
               )}
             </div>
             {/* ham menu */}
-            <div className="block md:hidden">
+            {/* <div className="block md:hidden">
               <button className="rounded bg-fourthColor p-2 text-primary transition hover:text-gray-600/75">
                 <MenuIcon />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     </header>
   );
 }
-
 
 export default Header;

@@ -13,6 +13,8 @@ function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignin, setShowSignin] = useState(false);
   const [logoutTriggered, setLogoutTriggered] = useState(false);
+  
+  console.log(" HOME",logoutTriggered)
 
   const getFoodData = async () => {
     try {
@@ -51,19 +53,19 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    getFoodData();
-  }, [logoutTriggered]); // Add logoutTriggered to dependency array
+  // useEffect(() => {
+  //   getFoodData();
+  // }, [logoutTriggered]); 
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    setLogoutTriggered((prev) => !prev); // Trigger useEffect
+    setLogoutTriggered((prev) => !prev); 
   };
 
-  // Check localStorage for token and update Redux store
   useEffect(() => {
+    getFoodData();
     getToken();
-  }, [logoutTriggered]); // This will run after a logout
+  }, [logoutTriggered]); 
 
   const getToken = () => {
     const token = localStorage.getItem("authToken");
@@ -84,7 +86,11 @@ function Home() {
       ) : null}
 
       <div className="bg-mainBg bg-contain bg-no-repeat bg-opacity-10 h-svh relative">
-        <Header handleLogin={handleLogin} handleSignin={handleSignin} onLogout={handleLogout} />
+        <Header
+          handleLogin={handleLogin}
+          handleSignin={handleSignin}
+          onLogout={handleLogout}
+        />
         <img
           src={imgSrc}
           alt="watermelon"
@@ -97,7 +103,11 @@ function Home() {
         </p>
       </div>
       <ExploreCategory />
-      <AllProducts foods={foods} url={url} />
+      <AllProducts
+        foods={foods}
+        url={url}
+        logoutTriggered = {logoutTriggered}
+      />
     </>
   );
 }

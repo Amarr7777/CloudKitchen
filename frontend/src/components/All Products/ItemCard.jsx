@@ -1,16 +1,137 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 
-function ItemCard({ food, url }) {
-  const [quantity, setQuantity] = useState(0); 
+function ItemCard({ food, url, logoutTriggered }) {
+  const [quantity, setQuantity] = useState(0);
+
+  console.log("ITEM CARD",logoutTriggered)
   
-  const handleAdd = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+
+  // Fetch cart data and update the quantity for the current food item
+  const getCart = async () => {
+    try {
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        alert("You need to log in to view your cart.");
+        return;
+      }
+      const response = await fetch(`${url}/api/cart/get`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (data.success) {
+        // Find the item in the cart that matches the current food item's id
+        const cartItem = data.data[food._id];
+        if (cartItem) {
+          console.log(cartItem);
+          setQuantity(cartItem); 
+        }
+        console.log("Cart data:", data);
+      } else {
+        alert("Failed to fetch cart data");
+      }
+    } catch (error) {
+      console.error("Error fetching cart data:", error);
+      alert("An error occurred while fetching the cart.");
+    }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      getCart(); // Fetch cart data when the component mounts
+    }
+  }, [logoutTriggered]);
+
+  // Handle adding item to cart
+  const handleAdd = () => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("You need to log in to add items to the cart.");
+      return ;
+    }
+    setQuantity((prevQuantity) => {
+      const newQuantity = prevQuantity + 1;
+      addToCart(newQuantity,token);
+      return newQuantity;
+    });
+  };
+
+  // Handle removing item from cart
   const handleRemove = () => {
     if (quantity > 0) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
+      setQuantity((prevQuantity) => {
+        const newQuantity = prevQuantity - 1;
+        removeFromCart(newQuantity);
+        return newQuantity;
+      });
+    }
+  };
+
+  // Add to cart function
+  const addToCart = async (quantity,token) => {
+    if (quantity > 0) {
+      try {
+        // const token = localStorage.getItem("authToken");
+        if (!token) {
+          alert("You need to log in to add items to the cart.");
+          return ;
+        }
+        const response = await fetch(`${url}/api/cart/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            itemId: food._id,
+          }),
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+          alert("Failed to add to cart");
+        }
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+        alert("An error occurred. Please try again.");
+      }
+    }
+  };
+
+  // Remove from cart function
+  const removeFromCart = async () => {
+    if (quantity > 0) {
+      try {
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+          alert("You need to log in to remove items from the cart.");
+          return;
+        }
+        const response = await fetch(`${url}/api/cart/remove`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            itemId: food._id,
+          }),
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+          alert("Failed to remove from cart");
+        }
+      } catch (error) {
+        console.error("Error removing from cart:", error);
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 
