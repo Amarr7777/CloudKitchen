@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ItemCard from "./ItemCard";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
@@ -12,6 +12,7 @@ function AllProducts({
 }) {
   // State for search query
   const [searchQuery, setSearchQuery] = useState("");
+  
 
   // Handle search input change
   const handleSearchChange = (event) => {

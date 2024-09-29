@@ -43,26 +43,6 @@ function Cart({ url }) {
           style={{ maxHeight: `${viewportHeight * 0.9}px` }}
         >
           <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
-          <CartCard url={url} />
         </div>
       </div>
       {/* Order Summary */}

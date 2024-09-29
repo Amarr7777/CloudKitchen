@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
+import { StoreContext } from "../../context/StoreContext";
 
 function ItemCard({ food, url, logoutTriggered }) {
-  const [quantity, setQuantity] = useState(0);
-
-  console.log("ITEM CARD",logoutTriggered)
-  
+  const { cartItems, addToCart, removeItem, token, setCartItems } =
+    useContext(StoreContext);
 
   // Fetch cart data and update the quantity for the current food item
   const getCart = async () => {
     try {
-      const token = localStorage.getItem("authToken");
       if (!token) {
         alert("You need to log in to view your cart.");
         return;
@@ -25,12 +23,8 @@ function ItemCard({ food, url, logoutTriggered }) {
       });
       const data = await response.json();
       if (data.success) {
-        // Find the item in the cart that matches the current food item's id
-        const cartItem = data.data[food._id];
-        if (cartItem) {
-          console.log(cartItem);
-          setQuantity(cartItem); 
-        }
+        // Update the cart items in the StoreContext
+        setCartItems(data.data);
         console.log("Cart data:", data);
       } else {
         alert("Failed to fetch cart data");
@@ -42,98 +36,10 @@ function ItemCard({ food, url, logoutTriggered }) {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
     if (token) {
       getCart(); // Fetch cart data when the component mounts
     }
-  }, [logoutTriggered]);
-
-  // Handle adding item to cart
-  const handleAdd = () => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      alert("You need to log in to add items to the cart.");
-      return ;
-    }
-    setQuantity((prevQuantity) => {
-      const newQuantity = prevQuantity + 1;
-      addToCart(newQuantity,token);
-      return newQuantity;
-    });
-  };
-
-  // Handle removing item from cart
-  const handleRemove = () => {
-    if (quantity > 0) {
-      setQuantity((prevQuantity) => {
-        const newQuantity = prevQuantity - 1;
-        removeFromCart(newQuantity);
-        return newQuantity;
-      });
-    }
-  };
-
-  // Add to cart function
-  const addToCart = async (quantity,token) => {
-    if (quantity > 0) {
-      try {
-        // const token = localStorage.getItem("authToken");
-        if (!token) {
-          alert("You need to log in to add items to the cart.");
-          return ;
-        }
-        const response = await fetch(`${url}/api/cart/add`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            itemId: food._id,
-          }),
-        });
-
-        const data = await response.json();
-        if (!data.success) {
-          alert("Failed to add to cart");
-        }
-      } catch (error) {
-        console.error("Error adding to cart:", error);
-        alert("An error occurred. Please try again.");
-      }
-    }
-  };
-
-  // Remove from cart function
-  const removeFromCart = async () => {
-    if (quantity > 0) {
-      try {
-        const token = localStorage.getItem("authToken");
-        if (!token) {
-          alert("You need to log in to remove items from the cart.");
-          return;
-        }
-        const response = await fetch(`${url}/api/cart/remove`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            itemId: food._id,
-          }),
-        });
-
-        const data = await response.json();
-        if (!data.success) {
-          alert("Failed to remove from cart");
-        }
-      } catch (error) {
-        console.error("Error removing from cart:", error);
-        alert("An error occurred. Please try again.");
-      }
-    }
-  };
+  }, [token]);
 
   return (
     <div className="flex flex-col justify-start items-center h-[200px] w-[150px] md:h-[250px] md:w-[300px] bg-secondary shadow-md rounded-lg cursor-pointer transition relative p-2">
@@ -163,14 +69,18 @@ function ItemCard({ food, url, logoutTriggered }) {
       <div className="absolute bottom-0 right-0 p-2 flex items-center gap-2">
         <button
           className="rounded-full bg-red-400 hover:scale-105"
-          onClick={handleRemove}
+          onClick={() => {
+            removeItem(food._id);
+          }}
         >
           <RemoveRoundedIcon className="text-white" />
         </button>
-        <div>{quantity}</div>
+        <div>{cartItems[food._id] || 0}</div>
         <button
           className="rounded-full bg-green-400 hover:scale-105"
-          onClick={handleAdd}
+          onClick={() => {
+            addToCart(food._id);
+          }}
         >
           <AddRoundedIcon className="text-white" />
         </button>
