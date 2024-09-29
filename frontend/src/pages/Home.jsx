@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import imgSrc from "../assets/watermelon.png";
 import ExploreCategory from "../components/ExploreCategory/ExploreCategory";
 import AllProducts from "../components/All Products/AllProducts";
@@ -12,6 +12,7 @@ function Home() {
   const [foods, setFoods] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignin, setShowSignin] = useState(false);
+  const [logoutTriggered, setLogoutTriggered] = useState(false);
 
   const getFoodData = async () => {
     try {
@@ -30,14 +31,14 @@ function Home() {
 
   const handleLogin = () => {
     setShowLogin(!showLogin);
-    setShowSignin(false); // Ensure the signup modal is closed
-    window.scrollTo(0, 0); // Scroll to top
+    setShowSignin(false);
+    window.scrollTo(0, 0);
   };
 
   const handleSignin = () => {
     setShowSignin(!showSignin);
-    setShowLogin(false); // Ensure the login modal is closed
-    window.scrollTo(0, 0); // Scroll to top
+    setShowLogin(false);
+    window.scrollTo(0, 0);
   };
 
   const switchModal = () => {
@@ -50,34 +51,40 @@ function Home() {
     }
   };
 
-  // Effect to disable/enable scrolling when a modal is open
-  useEffect(() => {
-    if (showLogin || showSignin) {
-      document.body.style.overflow = "hidden"; // Disable scrolling
-    } else {
-      document.body.style.overflow = ""; // Enable scrolling
-    }
-
-    return () => {
-      document.body.style.overflow = ""; // Cleanup overflow on unmount
-    };
-  }, [showLogin, showSignin]);
-
   useEffect(() => {
     getFoodData();
-  }, []);
+  }, [logoutTriggered]); // Add logoutTriggered to dependency array
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setLogoutTriggered((prev) => !prev); // Trigger useEffect
+  };
+
+  // Check localStorage for token and update Redux store
+  useEffect(() => {
+    getToken();
+  }, [logoutTriggered]); // This will run after a logout
+
+  const getToken = () => {
+    const token = localStorage.getItem("authToken");
+    console.log("Token on token check:", token);
+  };
 
   return (
     <>
       {showLogin ? (
-        <Login handleLogin={handleLogin} switchModal={switchModal} />
+        <Login handleLogin={handleLogin} switchModal={switchModal} url={url} />
       ) : null}
       {showSignin ? (
-        <SignUp handleSignin={handleSignin} switchModal={switchModal} />
+        <SignUp
+          handleSignin={handleSignin}
+          switchModal={switchModal}
+          url={url}
+        />
       ) : null}
 
       <div className="bg-mainBg bg-contain bg-no-repeat bg-opacity-10 h-svh relative">
-        <Header handleLogin={handleLogin} handleSignin={handleSignin} />
+        <Header handleLogin={handleLogin} handleSignin={handleSignin} onLogout={handleLogout} />
         <img
           src={imgSrc}
           alt="watermelon"

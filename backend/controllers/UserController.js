@@ -5,8 +5,9 @@ import validator from 'validator'
 
 //login 
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
     try {
+        const { email, password } = req.body;
+        console.log(email, password)
         if (!validator.isEmail(email)) {
             return res.json({ sucess: true, message: "please enter a valid email" })
         }
@@ -19,7 +20,7 @@ const loginUser = async (req, res) => {
                 if (result) {
                     const token = jwt.sign({ _id: data._id }, process.env.JWT_SECRET);
                     console.log(token)
-                    res.send({ sucess: true, data: token });
+                    res.json({ success: true, data: token });
                 } else {
                     res.json("Incorrect password");
                 }
@@ -52,9 +53,8 @@ const registerUser = async (req, res) => {
         }
         const newUser = await userModel.create({ name, email, password: hashedPassword });
         const user = await newUser.save()
-        res.status(201).json({ message: 'User created successfully' });
         const token = createToken(user._id)
-        res.json({ sucess: true, token })
+        res.status(201).json({ message: 'User created successfully', data: token });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
