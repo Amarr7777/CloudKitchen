@@ -6,8 +6,8 @@ import AllProducts from "../components/All Products/AllProducts";
 import Login from "../components/LoginSignUp/Login";
 import SignUp from "../components/LoginSignUp/SignUp";
 
-function Home() {
-  const url = "http://localhost:4000";
+function Home({url}) {
+  
 
   const [foods, setFoods] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
