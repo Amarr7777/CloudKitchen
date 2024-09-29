@@ -3,11 +3,15 @@ import Header from "../components/Header";
 import imgSrc from "../assets/watermelon.png";
 import ExploreCategory from "../components/ExploreCategory/ExploreCategory";
 import AllProducts from "../components/All Products/AllProducts";
+import Login from "../components/LoginSignUp/Login";
+import SignUp from "../components/LoginSignUp/SignUp";
 
 function Home() {
-  const url = "http://localhost:4000"
+  const url = "http://localhost:4000";
 
   const [foods, setFoods] = useState([]);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignin, setShowSignin] = useState(false);
 
   const getFoodData = async () => {
     try {
@@ -24,13 +28,56 @@ function Home() {
     }
   };
 
+  const handleLogin = () => {
+    setShowLogin(!showLogin);
+    setShowSignin(false); // Ensure the signup modal is closed
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
+  const handleSignin = () => {
+    setShowSignin(!showSignin);
+    setShowLogin(false); // Ensure the login modal is closed
+    window.scrollTo(0, 0); // Scroll to top
+  };
+
+  const switchModal = () => {
+    if (showLogin) {
+      setShowLogin(false);
+      setShowSignin(true);
+    } else {
+      setShowLogin(true);
+      setShowSignin(false);
+    }
+  };
+
+  // Effect to disable/enable scrolling when a modal is open
+  useEffect(() => {
+    if (showLogin || showSignin) {
+      document.body.style.overflow = "hidden"; // Disable scrolling
+    } else {
+      document.body.style.overflow = ""; // Enable scrolling
+    }
+
+    return () => {
+      document.body.style.overflow = ""; // Cleanup overflow on unmount
+    };
+  }, [showLogin, showSignin]);
+
   useEffect(() => {
     getFoodData();
   }, []);
+
   return (
     <>
+      {showLogin ? (
+        <Login handleLogin={handleLogin} switchModal={switchModal} />
+      ) : null}
+      {showSignin ? (
+        <SignUp handleSignin={handleSignin} switchModal={switchModal} />
+      ) : null}
+
       <div className="bg-mainBg bg-contain bg-no-repeat bg-opacity-10 h-svh relative">
-        <Header />
+        <Header handleLogin={handleLogin} handleSignin={handleSignin} />
         <img
           src={imgSrc}
           alt="watermelon"
@@ -43,7 +90,7 @@ function Home() {
         </p>
       </div>
       <ExploreCategory />
-      <AllProducts foods={foods} url={url}/>
+      <AllProducts foods={foods} url={url} />
     </>
   );
 }
