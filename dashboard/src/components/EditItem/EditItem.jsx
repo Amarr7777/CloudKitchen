@@ -95,7 +95,7 @@ function EditItem({ setShowEditModal, foodData, onEdit, url }) {
         {/* price and category */}
         <div className="flex flex-wrap md:flex-nowrap gap-1 w-full">
           <input
-            type="number" // Change to number input for price
+            type="number" 
             placeholder="Price"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -109,10 +109,11 @@ function EditItem({ setShowEditModal, foodData, onEdit, url }) {
             <option value="" disabled>
               Select Category
             </option>
-            <option value="Fruits">Fruits</option>
-            <option value=" Vegitable">Vegitable</option>
-            <option value="Health and wellnes">Health and wellnes</option>
-            <option value="Munchies">Munchies</option>
+            <option value="fruits">Fruits</option>
+            <option value="vegitable">Vegitable</option>
+            <option value="health">Health & wellnes</option>
+            <option value="munchies">Munchies</option>
+            <option value="drinks">Cold Drinks & Juice</option>
             {/* Add more categories as needed */}
           </select>
         </div>

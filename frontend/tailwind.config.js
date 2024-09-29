@@ -5,7 +5,22 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "Quicksand": ["Quicksand", "sans-serif"],
+        "Raleway": ["Raleway", "sans-serif"]
+      },
+      // backgroundImage:{
+      //    'mainBg': "url('/src/assets/main.svg')"
+      // },
+      colors: {
+        "primary": "#96CEB4",
+        "secondary": "#FFEEAD",
+        "thirdColor": "#FFAD60",
+        "fourthColor": "#A66E38",
+      }
+
+    },
   },
   plugins: [],
 }
