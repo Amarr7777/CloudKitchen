@@ -13,6 +13,7 @@ function Home() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignin, setShowSignin] = useState(false);
   const [logoutTriggered, setLogoutTriggered] = useState(false);
+  const [categorySelected, setCategorySelected] = useState("");
   
   console.log(" HOME",logoutTriggered)
 
@@ -102,11 +103,13 @@ function Home() {
           WELCOME TO OUR STORE
         </p>
       </div>
-      <ExploreCategory />
+      <ExploreCategory setCategorySelected={setCategorySelected} />
       <AllProducts
         foods={foods}
         url={url}
         logoutTriggered = {logoutTriggered}
+        categorySelected = {categorySelected}
+        setCategorySelected={setCategorySelected}
       />
     </>
   );

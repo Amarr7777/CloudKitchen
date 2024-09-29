@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import MenuIcon from "@mui/icons-material/Menu";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 function Header({ handleLogin, handleSignin, onLogout }) {
@@ -56,15 +55,12 @@ function Header({ handleLogin, handleSignin, onLogout }) {
           </div>
           {/* buttons */}
           <div className="flex items-center gap-4">
-            <div className="flex gap-2">
-              <a
-                className="rounded-md bg-transparent px-2 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor"
-                href="#"
-              >
+            <div className="flex gap-2">              
+              <div className="cursor-pointer rounded-md bg-transparent px-2 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor">
                 <div className="flex items-center justify-center gap-1 ">
                   <ShoppingBagIcon />
                 </div>
-              </a>
+              </div>
               {token && token.length > 0 ? (
                 <>
                   <button
