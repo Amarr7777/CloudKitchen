@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import AddIcon from "@mui/icons-material/Add";
-import AdditemHome from "../AddItem/AdditemHome";
+import AdditemHome from "../AddItem/AdditemHome.jsx";
 
 function ListItemHome({
   viewportHeight,
