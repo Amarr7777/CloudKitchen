@@ -7,7 +7,8 @@ const StoreContextProvider = (props) => {
   const [foods, setFoods] = useState([]);
   const [token, setToken] = useState("");
   const [orderData, setOrderData] = useState([]);
-  const url = "http://localhost:4000";
+  const url = "https://cloudkitchen-backend.onrender.com";
+  // const url = "http://localhost:4000";
 
   useEffect(() => {
     async function loadData() {
