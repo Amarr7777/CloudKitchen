@@ -1,4 +1,4 @@
-import AddItem from "./AddItem";
+import AddItem from "./AddItem.jsx";
 
 function AdditemHome({ viewportHeight, viewportWidth, setShowAddModal, onAdd, url}) {
   return (
