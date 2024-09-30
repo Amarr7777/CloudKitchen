@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import AddIcon from "@mui/icons-material/Add";
-import AdditemHome from "../AddItem/AdditemHome.jsx";
+import AddItemHome from "../AddItem/AddItemHome.jsx";
 
 function ListItemHome({
   viewportHeight,
@@ -47,7 +47,7 @@ function ListItemHome({
     <>
       {/* add modal */}
       {showAddModal ? (
-        <AdditemHome setShowAddModal={setShowAddModal} onAdd={getFoodData} url={url}/>
+        <AddItemHome setShowAddModal={setShowAddModal} onAdd={getFoodData} url={url}/>
       ) : null}
       <div
         className="flex flex-col justify-center items-center py-10 w-full md:w-full"
