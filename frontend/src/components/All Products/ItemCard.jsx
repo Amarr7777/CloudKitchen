@@ -47,22 +47,20 @@ function ItemCard({ food, url, logoutTriggered }) {
         <img
           src={`${url}/images/${food.image}`}
           alt="image"
-          className="w-[150px] h-[70px] md:w-[250px] md:h-[150px] object-cover p-1 md:p-2 rounded-md border-2 border-thirdColor"
+          className="w-[150px] h-[70px] md:w-[250px] md:h-[150px] object-cover p-1 md:p-2 rounded-md border-2 border-primary"
         />
       </div>
       {/* details */}
       <div className="flex flex-col w-full items-start justify-start p-2">
         <div className="flex justify-between w-full">
-          <p className="font-bold font-Quicksand text-thirdColor">
+          <p className="font-bold font-Quicksand text-primary">
             ₹{food.price}{" "}
           </p>
-          <p className="font-light font-Quicksand text-thirdColor">
+          <p className="font-light font-Quicksand text-primary">
             {food.quantity}{" "}
           </p>
         </div>
-        <p className="font-medium font-Quicksand text-thirdColor">
-          {food.name}{" "}
-        </p>
+        <p className="font-medium font-Quicksand text-primary">{food.name} </p>
       </div>
       {/* add to cart */}
       <div className="absolute bottom-0 right-0 p-2 flex items-center gap-2">
@@ -76,7 +74,7 @@ function ItemCard({ food, url, logoutTriggered }) {
             >
               <RemoveRoundedIcon className="text-white" />
             </button>
-            <div>{cartItems[food._id] || 0}</div>
+            <div className="text-primary">{cartItems[food._id] || 0}</div>
             <button
               className="rounded-full bg-green-400 hover:scale-105"
               onClick={() => {
