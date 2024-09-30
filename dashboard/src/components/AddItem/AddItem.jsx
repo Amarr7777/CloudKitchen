@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import axios from "axios";
 
 function AddItem({ setShowAddModal, onAdd, url }) {
   const [name, setName] = useState("");
