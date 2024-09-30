@@ -204,7 +204,7 @@ function SignUp({ handleSignin, switchModal, url }) {
                 </span>
               </p>
             </div>
-            <button className="bg-primary text-white rounded-md py-2 px-5">
+            <button className="bg-primary text-secondary rounded-md py-2 px-5">
               Sign in
             </button>
           </div>

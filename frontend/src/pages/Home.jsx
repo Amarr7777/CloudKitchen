@@ -94,13 +94,13 @@ function Home({url}) {
           handleSignin={handleSignin}
           onLogout={handleLogout}
         />
-        <img
+        {/* <img
           src={imgSrc}
           alt="watermelon"
           width={1000}
           height={1000}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rotate-12"
-        />
+        /> */}
         <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 text-7xl leading-relaxed text-pretty text-center md:text-6xl lg:text-8xl md:text-nowrap text-fourthColor">
           WELCOME TO OUR STORE
         </p>

@@ -52,7 +52,7 @@ function Login({ handleLogin, switchModal, url }) {
       if (result.success) {
         const token = result.data;
         localStorage.setItem("authToken", token);
-        handleLogin()
+        handleLogin();
       } else {
         if (result.message === "Incorrect password") {
           setIncorrectPassword(true);
@@ -120,7 +120,7 @@ function Login({ handleLogin, switchModal, url }) {
               )}
             </div>
             <div>
-              <p className="text-white font-light font-Quicksand">
+              <p className="text-secondary font-light font-Quicksand">
                 new member?{" "}
                 <span
                   onClick={switchModal}
@@ -132,7 +132,7 @@ function Login({ handleLogin, switchModal, url }) {
             </div>
             <button
               type="submit"
-              className="bg-primary text-white rounded-md py-2 px-5"
+              className="bg-primary text-secondary rounded-md py-2 px-5"
             >
               Login
             </button>

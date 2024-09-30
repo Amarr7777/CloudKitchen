@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SideBar from "../components/sidebar/SideBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import HeaderDashboard from "../components/header/HeaderDashboard";
@@ -7,6 +7,7 @@ import OrderListHome from "../components/OrderList/OrderListHome";
 import SidebarMobile from "../components/sidebar/SidebarMobile";
 import CloseIcon from "@mui/icons-material/Close";
 import OrderHomeMobile from "../components/OrderList/OrderHomeMobile";
+import { StoreContext } from "../context/StoreContext";
 
 function Home() {
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
@@ -14,8 +15,9 @@ function Home() {
   const [index, setIndex] = useState(0);
   const [menuVisible, setMenuVisible] = useState(false);
   const [foodData, setFoodData] = useState([]);
+  const {url} = useContext(StoreContext)
 
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
 
   const handleResize = () => {
     setViewportHeight(window.innerHeight);

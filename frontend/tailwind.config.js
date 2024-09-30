@@ -14,9 +14,9 @@ export default {
       //    'mainBg': "url('/src/assets/main.svg')"
       // },
       colors: {
-        "primary": "#96CEB4",
-        "secondary": "#FFEEAD",
-        "thirdColor": "#FFAD60",
+        "primary": "#ffffff",
+        "secondary": "#C8C4B5FF",
+        "thirdColor": "#A79889FF",
         "fourthColor": "#A66E38",
       }
 
