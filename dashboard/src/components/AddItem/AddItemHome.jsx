@@ -1,6 +1,6 @@
 import AddItem from "./AddItem.jsx";
 
-function AdditemHome({ viewportHeight, viewportWidth, setShowAddModal, onAdd, url}) {
+function AddItemHome({ viewportHeight, viewportWidth, setShowAddModal, onAdd, url}) {
   return (
     <div
       className="flex flex-col justify-center items-center py-10 w-full absolute inset-0 backdrop-blur-lg z-20"
@@ -11,4 +11,4 @@ function AdditemHome({ viewportHeight, viewportWidth, setShowAddModal, onAdd, ur
   );
 }
 
-export default AdditemHome;
+export default AddItemHome;
