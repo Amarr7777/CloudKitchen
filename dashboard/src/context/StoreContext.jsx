@@ -5,7 +5,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   
     // const url = "http://localhost:4000";
-    const url = "https://cloudkitchen-backend.onrender.com";
+    const url = "https://cloudkitchen-2itp.onrender.com";
     const[orderData,setOrderData] = useState([])
     useEffect(()=>{
       fetchOrders();
