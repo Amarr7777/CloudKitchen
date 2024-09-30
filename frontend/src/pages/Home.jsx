@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import imgSrc from "../assets/watermelon.png";
 import ExploreCategory from "../components/ExploreCategory/ExploreCategory";
 import AllProducts from "../components/All Products/AllProducts";
 import Login from "../components/LoginSignUp/Login";
 import SignUp from "../components/LoginSignUp/SignUp";
+import { StoreContext } from "../context/StoreContext";
 
 function Home({url}) {
   
 
-  const [foods, setFoods] = useState([]);
+  // const [foods, setFoods] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignin, setShowSignin] = useState(false);
   const [logoutTriggered, setLogoutTriggered] = useState(false);
   const [categorySelected, setCategorySelected] = useState("");
+  const{foods,setFoods} = useContext(StoreContext)
   
   console.log(" HOME",logoutTriggered)
 
-  const getFoodData = async () => {
-    try {
-      const response = await fetch(`${url}/api/food/listfoods`, {
-        method: "GET",
-      });
-      const result = await response.json();
+  // const getFoodData = async () => {
+  //   try {
+  //     const response = await fetch(`${url}/api/food/listfoods`, {
+  //       method: "GET",
+  //     });
+  //     const result = await response.json();
 
-      if (result.success) {
-        setFoods(result.data);
-      }
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  };
+  //     if (result.success) {
+  //       setFoods(result.data);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error:", error);
+  //   }
+  // };
 
   const handleLogin = () => {
     setShowLogin(!showLogin);
@@ -64,7 +66,7 @@ function Home({url}) {
   };
 
   useEffect(() => {
-    getFoodData();
+    // getFoodData();
     getToken();
   }, [logoutTriggered]); 
 

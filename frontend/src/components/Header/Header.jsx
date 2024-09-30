@@ -26,17 +26,19 @@ function Header({ handleLogin, handleSignin, onLogout }) {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* logo */}
-          <div className="md:flex md:items-center md:gap-12 bg-gradient-to-r from-fourthColor to-orange-400 bg-clip-text text-transparent cursor-pointer">
+          <Link 
+          to = "/"
+          className="md:flex md:items-center md:gap-12 bg-gradient-to-r from-fourthColor to-orange-400 bg-clip-text text-transparent cursor-pointer">
             <p className="font-Quicksand font-medium text-lg whitespace-nowrap">
               Cloud Kitchen
             </p>
-          </div>
+          </Link>
 
           {/* buttons */}
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
               <div className="cursor-pointer rounded-md bg-transparent px-2 py-2 hover:scale-105  font-Quicksand font-medium text-fourthColor">
-                <Link
+                <div
                   onClick={()=>{
                     if(!token){
                       handleLogin()
@@ -52,7 +54,7 @@ function Header({ handleLogin, handleSignin, onLogout }) {
                     </div>
                   ) : null}
                   <ShoppingBagIcon />
-                </Link>
+                </div>
               </div>
               {token && token.length > 0 ? (
                 <>

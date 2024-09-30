@@ -25,7 +25,6 @@ function ItemCard({ food, url, logoutTriggered }) {
       if (data.success) {
         // Update the cart items in the StoreContext
         setCartItems(data.data);
-        console.log("Cart data:", data);
       } else {
         alert("Failed to fetch cart data");
       }
