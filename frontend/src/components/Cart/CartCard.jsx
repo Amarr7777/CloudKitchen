@@ -39,7 +39,7 @@ function CartCard({ item, quantity, url }) {
   }, [token]);
 
   return (
-    <div className="w-full flex flex-wrap justify-between items-center p-2 shadow bg-white rounded-lg">
+    <div className="w-full flex flex-wrap justify-between items-center p-2 shadow bg-secondary rounded-lg">
       {/* Image */}
       <div className="w-1/3 flex flex-col justify-center items-start">
         <div className="flex flex-col justify-center items-center">

@@ -23,8 +23,8 @@ function OrderCard() {
   //     fetchOrders();
   //   }, []);
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Previous Orders</h1>
+    <div className="container mx-auto p-4 font-Quicksand">
+      <h1 className="text-2xl font-bold mb-4 text-secondary">Previous Orders</h1>
       {orderData &&
         orderData.map((order) => (
           <div
@@ -33,13 +33,13 @@ function OrderCard() {
           >
             <h2 className="text-sm font-semibold">Order ID: {order._id}</h2>
             <p className="text-sm text-gray-600">Address: {order.address}</p>
-            <p className="text-lg text-gray-600 font-bold">
+            <p className="text-lg text-fourthColor font-bold">
               Status: {order.status}
             </p>
             <p className="text-sm text-gray-600">
               Date: {new Date(order.date).toLocaleString()}
             </p>
-            <p className="text-lg font-bold text-green-700">
+            <p className="text-lg font-bold text-primary">
               Total Amount: ₹{order.amount}
             </p>
 

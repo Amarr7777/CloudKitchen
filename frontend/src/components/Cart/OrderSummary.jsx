@@ -68,11 +68,13 @@ function OrderSummary() {
       {orderPlaced ? <OrderPlaced /> : null}
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center ">
-          <p className="font-medium font-Quicksand text-primary">Items</p>
-          <p className="font-medium font-Quicksand text-primary">₹{amount}</p>
+          <p className="font-medium font-Quicksand text-fourthColor">Items</p>
+          <p className="font-medium font-Quicksand text-fourthColor">
+            ₹{amount}
+          </p>
         </div>
         <div className="flex flex-col w-full gap-5">
-          <p className="font-bold font-Quicksand text-primary">Address</p>
+          <p className="font-bold font-Quicksand text-fourthColor">Address</p>
           <textarea
             required
             name=""
@@ -81,16 +83,14 @@ function OrderSummary() {
             onChange={(e) => {
               setAddress(e.target.value);
             }}
-            className="bg-transparent outline-none border border-primary rounded-md p-2 text-primary"
+            className="bg-transparent outline-none border border-fourthColor rounded-md p-2 text-fourthColor"
           ></textarea>
         </div>
       </div>
       <div className="flex flex-col w-full">
-        <div className="border border-primary/20 my-3"></div>
-        <button className="bg-primary p-2 rounded-md">
-          <p className="font-bold font-Quicksand text-fourthColor">
-            Place Order
-          </p>
+        <div className="border border-fourthColor/20 my-3"></div>
+        <button className="bg-fourthColor p-2 rounded-md">
+          <p className="font-bold font-Quicksand text-secondary">Place Order</p>
         </button>
       </div>
     </form>

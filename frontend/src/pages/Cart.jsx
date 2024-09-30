@@ -39,7 +39,6 @@ function Cart({ url }) {
   }, []);
 
   return (
-    
     <div
       className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8"
       style={{ height: `${viewportHeight}px` }}
@@ -61,7 +60,7 @@ function Cart({ url }) {
         >
           {Object.keys(cartItems).map((itemId, index) => {
             const foodItem = foods.find((food) => food._id === itemId);
-            const quantity = cartItems[itemId]; 
+            const quantity = cartItems[itemId];
             if (foodItem && quantity > 0) {
               return (
                 <CartCard
@@ -77,11 +76,11 @@ function Cart({ url }) {
         </div>
       </div>
       {/* Order Summary */}
-      <div className="lg:h-full bg-fourthColor p-5">
-        <h1 className="font-Quicksand font-bold md:text-3xl text-primary">
+      <div className="lg:h-full bg-secondary p-5">
+        <h1 className="font-Quicksand font-bold md:text-3xl text-fourthColor">
           Order Summary
         </h1>
-        <div className="border border-primary/20 my-3"></div>
+        <div className="border border-fourthColor/20 my-3"></div>
         <OrderSummary />
       </div>
     </div>
