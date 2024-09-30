@@ -24,12 +24,14 @@ function OrderCard() {
   //   }, []);
   return (
     <div className="container mx-auto p-4 font-Quicksand">
-      <h1 className="text-2xl font-bold mb-4 text-secondary">Previous Orders</h1>
+      <h1 className="text-2xl font-bold mb-4 text-fourthColor">
+        Previous Orders
+      </h1>
       {orderData &&
         orderData.map((order) => (
           <div
             key={order._id}
-            className="bg-white shadow-md rounded-lg p-4 mb-4"
+            className="bg-secondary shadow-md rounded-lg p-4 mb-4"
           >
             <h2 className="text-sm font-semibold">Order ID: {order._id}</h2>
             <p className="text-sm text-gray-600">Address: {order.address}</p>
@@ -46,7 +48,7 @@ function OrderCard() {
             {order.items.length > 0 ? (
               <div className="mt-2">
                 <h3 className="text-md font-semibold">Items:</h3>
-                <ul className="list-disc list-inside bg-gray-300 rounded-md p-2">
+                <ul className="list-disc list-inside bg-thirdColor/20 rounded-md p-2">
                   {order.items.map((item) => (
                     <li
                       key={item._id}

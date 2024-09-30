@@ -66,23 +66,33 @@ function ItemCard({ food, url, logoutTriggered }) {
       </div>
       {/* add to cart */}
       <div className="absolute bottom-0 right-0 p-2 flex items-center gap-2">
-        <button
-          className="rounded-full bg-red-400 hover:scale-105"
-          onClick={() => {
-            removeItem(food._id);
-          }}
-        >
-          <RemoveRoundedIcon className="text-white" />
-        </button>
-        <div>{cartItems[food._id] || 0}</div>
-        <button
-          className="rounded-full bg-green-400 hover:scale-105"
-          onClick={() => {
-            addToCart(food._id);
-          }}
-        >
-          <AddRoundedIcon className="text-white" />
-        </button>
+        {food.stock ? (
+          <>
+            <button
+              className="rounded-full bg-red-400 hover:scale-105"
+              onClick={() => {
+                removeItem(food._id);
+              }}
+            >
+              <RemoveRoundedIcon className="text-white" />
+            </button>
+            <div>{cartItems[food._id] || 0}</div>
+            <button
+              className="rounded-full bg-green-400 hover:scale-105"
+              onClick={() => {
+                addToCart(food._id);
+              }}
+            >
+              <AddRoundedIcon className="text-white" />
+            </button>
+          </>
+        ) : (
+          <div className="bg-red-600 py-1 px-2 rounded-full">
+            <p className="font-Quicksand font-sm text-secondary">
+              Out of Stock
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
