@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Router from './routes/Router'
 
 function App() {
-  const url = "http://localhost:4000";
+  const url = "https://cloudkitchen-2itp.onrender.com";
   return (
     <>
       <Router url={url}/>
